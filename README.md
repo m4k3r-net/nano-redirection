@@ -1,12 +1,12 @@
 NanoRedirection
 ===
 
-Contributors: nanodesigns
-Tags: redirection, http redirection, wordpress redirection
-Requires at least: 3.0
-Tested up to: 4.4.2
-Stable tag: 1.0.0
-License: GPL-2.0+
+Contributors: nanodesigns<br>
+Tags: redirection, http redirection, wordpress redirection<br>
+Requires at least: 3.0<br>
+Tested up to: 4.4.2<br>
+Stable tag: 1.0.0<br>
+License: GPL-2.0+<br>
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
 Create a native, easy-to-use redirection being in WordPress database schema that works in single site and multisite instances.
@@ -23,7 +23,7 @@ The plugin is simple to install:
 4. Find the menu under `Tools` menu and create necessary redirections
 
 ## Frequently Asked Questions
-**Q. Where is the menu?**
+**Q. Where is the menu?**<br>
 **A.** The `Redirection` menu is under `Tools` menu in admin panel.
 
 ## Screenshots
