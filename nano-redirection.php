@@ -115,7 +115,7 @@ function nr_register_cpt_redirection() {
 }
 
 
-/** -------- META BOX -------- */
+/** -------- META BOX -------- **/
 
 add_action( 'add_meta_boxes', 'nr_redirection_meta_box' );
 
@@ -142,13 +142,13 @@ function redirection_callback() {
     	<!-- SAVING FROM URL TO THE 'post_title' FIELD OF 'posts' TABLE -->
         <p>
         	<label for="redirect-to"><?php _e( 'Redirect from', 'nano-redirection' ); ?></label><br>
-        	<input type="url" name="post_title" id="redirect-from" value="<?php echo get_the_title( $post ); ?>" placeholder="Redirect from" required>
+        	<input type="url" name="post_title" id="redirect-from" value="<?php echo get_the_title( $post ); ?>" placeholder="<?php echo _x( 'Redirect from URL', 'placeholder', 'nano-redirection' ); ?>" required>
         </p>
 
         <!-- SAVING TO URL TO THE 'post_excerpt' FIELD OF 'posts' TABLE -->
         <p>
         	<label for="redirect-to"><?php _e( 'Redirect to', 'nano-redirection' ); ?></label><br>
-        	<input type="url" name="excerpt" id="redirect-to" value="<?php echo get_post_field( 'post_excerpt', $post->ID ); ?>" placeholder="Redirect to" required>
+        	<input type="url" name="excerpt" id="redirect-to" value="<?php echo get_post_field( 'post_excerpt', $post->ID ); ?>" placeholder="<?php echo _x( 'Redirect to URL', 'placeholder', 'nano-redirection' ); ?>" required>
         </p>
 
         <p>
@@ -180,8 +180,8 @@ function save_redirection_specifics_meta( $post_id ) {
     if ( 'redirection' == $_POST['post_type'] && !current_user_can('publish_post', $post_id) )
         return $post_id;
      
-    $old_http_status 				= get_post_meta($post_id, 'http_status', true);
-    $new_http_status_http_status 	= $_POST['http_status'];
+    $old_http_status 	= get_post_meta($post_id, 'http_status', true);
+    $new_http_status 	= $_POST['http_status'];
 
     if ( $new_http_status && $new_http_status != $old_http_status )
     	update_post_meta( $post_id, 'http_status', $new_http_status );
@@ -307,4 +307,47 @@ function nr_get_current_url() {
 
 	/* Return the full address */
 	return $protocol.'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+}
+
+
+
+/** ------------------------------------ **
+            NanoRedirection API
+**  ------------------------------------ **/
+
+/**
+ * Create Redirection
+ *
+ * A helper function for the part of the API will let you use this plugin
+ * for any plugin or theme as an extension. The function will create a
+ * redirection for 2 specific URL and will redirect using HTTP status code.
+ *
+ * @since  1.0.0
+ * 
+ * @param  string $from_url The URL from which to redirect to.
+ * @param  string $to_url   The URL to which to redirect to.
+ * @param  string $status   HTTP status code, 301 and 302 accepted.
+ * @return void
+ * --------------------------------------------------------------------------
+ */
+function nr_create_redirection( $from_url = null, $to_url = null, $status = '301' ) {
+
+    if( null === $from_url && null === $to_url )
+        return;
+
+    $user_id = get_current_user_id();
+
+    // Insert the post into the database
+    $post_id = wp_insert_post( array(
+      'post_title'    => $from_url,
+      'post_status'   => 'publish',
+      'post_excerpt'  => $to_url,
+      'post_author'   => $user_id,
+      'post_type'     => 'redirection',
+    ) );
+
+    $status = '302' === $status ? $status : '301';
+
+    update_post_meta( $post_id, 'http_status', $status );
+
 }

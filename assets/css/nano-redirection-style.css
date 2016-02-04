@@ -1,3 +1,15 @@
+.green{
+	color: green;
+}
+.red{
+	color: red;
+}
+.orange{
+	color: orange;
+}
+.grey{
+	color: #999;
+}
 #redirect-from,
 #redirect-to{
 	padding: 3px 8px;
