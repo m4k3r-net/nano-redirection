@@ -1,0 +1,39 @@
+#redirect-from,
+#redirect-to{
+	padding: 3px 8px;
+    font-size: 1.7em;
+    line-height: 100%;
+    height: 1.7em;
+    width: 100%;
+    outline: 0;
+    margin: 0 0 3px;
+    background-color: #fff;
+}
+#redirection-specifics{
+	background-color: transparent;
+	box-shadow: 0 0 0 transparent;
+	border: 0;
+}
+#redirection-specifics h2.hndle,
+#redirection-specifics button.handlediv{
+	display: none;
+}
+#redirection-specifics .inside{
+	padding: 0;
+	margin-top: 0;
+}
+body.post-type-redirection #post-body-content,
+body.post-type-redirection .edit-form-section{
+	margin-bottom: 0;
+}
+body.post-type-redirection .wp-list-table td.column-title strong,
+body.post-type-redirection .wp-list-table td.column-title .row-title{
+	font-weight: normal;
+	color: #999;
+}
+body.post-type-redirection .wp-list-table td.column-title .row-title:hover{
+	color: #00a0d2;
+}
+.redirection-specifics-holder p:first-of-type{
+	margin-top: 0;
+}
